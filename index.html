@@ -1,295 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2500-4000A ACB Wiring Simulator</title>
 
-<title>Let's Start Learning Together</title>
+<style>
 
-<link rel="stylesheet" href="style.css">
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+body{
+background:#eceff1;
+height:100vh;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+}
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+/* Header */
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+header{
+height:70px;
+background:#005EB8;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+font-weight:bold;
+letter-spacing:1px;
+}
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+/* Toolbar */
+
+.toolbar{
+height:50px;
+background:#1f2937;
+display:flex;
+align-items:center;
+padding:10px;
+gap:10px;
+}
+
+.toolbar button{
+padding:8px 15px;
+background:#1976D2;
+border:none;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+.toolbar button:hover{
+background:#1565C0;
+}
+
+/* Main */
+
+.container{
+flex:1;
+display:flex;
+overflow:hidden;
+}
+
+/* Left */
+
+.left{
+width:240px;
+background:#263238;
+color:white;
+padding:15px;
+overflow:auto;
+}
+
+.left h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+.controlBtn{
+
+width:100%;
+margin-bottom:10px;
+padding:12px;
+
+background:#1976D2;
+color:white;
+
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-size:15px;
+}
+
+.controlBtn:hover{
+background:#0D47A1;
+}
+
+/* Center */
+
+.center{
+flex:1;
+background:white;
+position:relative;
+overflow:auto;
+}
+
+svg{
+width:2200px;
+height:1200px;
+}
+
+/* Right */
+
+.right{
+width:300px;
+background:#eceff1;
+padding:15px;
+overflow:auto;
+border-left:2px solid #ccc;
+}
+
+.card{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:8px;
+box-shadow:0 0 5px rgba(0,0,0,.2);
+}
+
+.card h3{
+margin-bottom:10px;
+}
+
+.status{
+display:flex;
+justify-content:space-between;
+margin-bottom:8px;
+}
+
+/* Event Log */
+
+.footer{
+height:180px;
+background:#111827;
+color:#00ff66;
+padding:10px;
+overflow:auto;
+font-family:monospace;
+}
+
+.event{
+margin-bottom:5px;
+}
+
+</style>
 
 </head>
 
 <body>
 
-<!-- ================= NAVIGATION ================= -->
+<header>
 
-<nav class="navbar">
+2500-4000A Air Circuit Breaker Wiring Simulator
 
-<div class="logo">
+</header>
 
-<i class="fa-solid fa-bolt"></i>
+<div class="toolbar">
 
-<span>Let's Start Learning Together</span>
+<button>Zoom +</button>
 
-</div>
+<button>Zoom -</button>
 
-<ul class="menu">
+<button>Reset View</button>
 
-<li><a href="#">Home</a></li>
+<button>Dark Mode</button>
 
-<li><a href="learn.html">Learn</a></li>
-
-<li><a href="quiz.html">Quiz</a></li>
-
-<li><a href="videos.html">Videos</a></li>
-
-<li><a href="login.html">Sign In</a></li>
-
-<li><a href="signup.html" class="signup">Create Account</a></li>
-
-</ul>
-
-</nav>
-
-<!-- ================= HERO ================= -->
-
-<section class="hero">
-
-<div class="hero-left">
-
-<h1>
-
-Let's Start
-
-<span>Learning Together</span>
-
-</h1>
-
-<p>
-
-Master Electrical Protection Devices through
-
-interactive lessons, animations,
-
-real industrial examples and quizzes.
-
-</p>
-
-<div class="hero-buttons">
-
-<a href="learn.html" class="btn">
-
-Start Learning
-
-</a>
-
-<a href="signup.html" class="btn2">
-
-Create Account
-
-</a>
+<button>Fullscreen</button>
 
 </div>
 
+<div class="container">
+
+<!-- LEFT -->
+
+<div class="left">
+
+<h2>Controls</h2>
+
+<button class="controlBtn">Close Breaker</button>
+
+<button class="controlBtn">Open Breaker</button>
+
+<button class="controlBtn">Charge Spring</button>
+
+<button class="controlBtn">Shunt Trip</button>
+
+<button class="controlBtn">UV Trip</button>
+
+<button class="controlBtn">Ground Fault</button>
+
+<button class="controlBtn">Short Circuit</button>
+
+<button class="controlBtn">Overload</button>
+
+<button class="controlBtn">Remote Reset</button>
+
+<button class="controlBtn">Emergency Trip</button>
+
+<button class="controlBtn">Reset Simulator</button>
+
 </div>
 
-<div class="hero-right">
+<!-- CENTER -->
 
-<img src="images/hero.png" alt="Learning">
+<div class="center">
+
+<svg>
+
+<!-- Busbars -->
+
+<line x1="150" y1="150" x2="150" y2="900"
+stroke="red"
+stroke-width="8"/>
+
+<line x1="220" y1="150" x2="220" y2="900"
+stroke="yellow"
+stroke-width="8"/>
+
+<line x1="290" y1="150" x2="290" y2="900"
+stroke="blue"
+stroke-width="8"/>
+
+<line x1="360" y1="150" x2="360" y2="900"
+stroke="black"
+stroke-width="8"/>
+
+<text x="130" y="120">R</text>
+<text x="200" y="120">Y</text>
+<text x="270" y="120">B</text>
+<text x="340" y="120">N</text>
+
+<!-- Breaker -->
+
+<rect
+x="700"
+y="250"
+width="350"
+height="250"
+fill="#f5f5f5"
+stroke="black"
+stroke-width="3"/>
+
+<text
+x="760"
+y="300"
+font-size="24">
+
+AIR CIRCUIT BREAKER
+
+</text>
+
+<text
+x="770"
+y="340"
+font-size="18">
+
+SVG Diagram
+
+</text>
+
+<!-- XT -->
+
+<rect
+x="1300"
+y="220"
+width="400"
+height="420"
+fill="#ffffff"
+stroke="black"
+stroke-width="2"/>
+
+<text
+x="1450"
+y="250">
+
+XT TERMINAL
+
+</text>
+
+</svg>
 
 </div>
 
-</section>
+<!-- RIGHT -->
 
-<!-- ================= COURSES ================= -->
-
-<section class="courses">
-
-<h2>
-
-Popular Courses
-
-</h2>
-
-<p>
-
-Start learning from beginner to industrial expert.
-
-</p>
-
-<div class="course-grid">
+<div class="right">
 
 <div class="card">
 
-<i class="fa-solid fa-bolt"></i>
+<h3>Status</h3>
 
-<h3>Air Circuit Breaker</h3>
-
-<p>
-
-Construction
-
-Working Principle
-
-Trip Unit
-
-LSIG
-
-Testing
-
-Maintenance
-
-</p>
-
-<a href="courses/acb.html">
-
-Learn More →
-
-</a>
-
+<div class="status">
+<span>Breaker</span>
+<span id="breaker">OPEN</span>
 </div>
 
-<div class="card">
-
-<i class="fa-solid fa-shield-halved"></i>
-
-<h3>MCCB</h3>
-
-<p>
-
-Construction
-
-Thermal Trip
-
-Magnetic Trip
-
-Electronic Release
-
-Breaking Capacity
-
-</p>
-
-<a href="courses/mccb.html">
-
-Learn More →
-
-</a>
-
+<div class="status">
+<span>Spring</span>
+<span>DISCHARGED</span>
 </div>
 
-<div class="card">
-
-<i class="fa-solid fa-plug-circle-bolt"></i>
-
-<h3>MCB</h3>
-
-<p>
-
-B Curve
-
-C Curve
-
-D Curve
-
-Arc Chamber
-
-Trip Mechanism
-
-</p>
-
-<a href="courses/mcb.html">
-
-Learn More →
-
-</a>
-
+<div class="status">
+<span>Motor</span>
+<span>OFF</span>
 </div>
 
-<div class="card">
-
-<i class="fa-solid fa-user-shield"></i>
-
-<h3>RCD / RCBO</h3>
-
-<p>
-
-Residual Current
-
-Human Protection
-
-Equipment Protection
-
-Testing
-
-Applications
-
-</p>
-
-<a href="courses/rcd.html">
-
-Learn More →
-
-</a>
-
+<div class="status">
+<span>Trip Coil</span>
+<span>OFF</span>
 </div>
 
-<div class="card">
-
-<i class="fa-solid fa-industry"></i>
-
-<h3>VCB</h3>
-
-<p>
-
-Vacuum Bottle
-
-Arc Extinction
-
-Mechanism
-
-Industrial Applications
-
-</p>
-
-<a href="courses/vcb.html">
-
-Learn More →
-
-</a>
-
+<div class="status">
+<span>UV Coil</span>
+<span>OFF</span>
 </div>
 
-<div class="card">
+<div class="status">
+<span>Voltage</span>
+<span>415V</span>
+</div>
 
-<i class="fa-solid fa-network-wired"></i>
+<div class="status">
+<span>Current</span>
+<span>0A</span>
+</div>
 
-<h3>RMU</h3>
+<div class="status">
+<span>Fault</span>
+<span>NONE</span>
+</div>
 
-<p>
-
-Ring Main Unit
-
-Loop System
-
-Transformer Supply
-
-Protection
-
-</p>
-
-<a href="courses/rmu.html">
-
-Learn More →
-
-</a>
+</div>
 
 </div>
 
 </div>
 
-</section>
+<div class="footer">
 
-<!-- ===== Continue in Part 2 ===== -->
+<div class="event">
+
+09:00 Simulator Started
+
+</div>
+
+<div class="event">
+
+09:01 Waiting for Operation...
+
+</div>
+
+</div>
+
+<script>
+
+console.log("ACB Simulator Started");
+
+</script>
+
+</body>
+</html>
